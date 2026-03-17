@@ -1,40 +1,93 @@
 /**
 *
-* MAIN CLASS UseCase1HotelBookingApp
+* ABSTRACT CLASS Room
 *
 *
-* Use Case 1: Application Entry & Welcome Message
+* Use Case 2: Basic Room Types & Static Availability
 *
 * Description:
-* This class represents the entry point of the
-* Hotel Booking Management System.
+* This abstract class represents a generic hotel room.
 *
-* At this stage, the application:
-* Starts execution from the main() method
-* Displays a welcome message to the user
+* It models attributes that are intrinsic to a room type * and remain constant regardless of availability.
 *
+* Inventory-related concerns are intentionally excluded.
 *
-Confirms that the system has started successfully
-* No business logic, data structures, or user input
-* is implemented in this use case.
-*
-* The goal is to establish a clear and predictable
-* application startup point.
-*
-* @author Developer
-* @version 1.0
+* @version 2.1
 */
-public class App {
-/**
-* Application entry point.
-*
-* This method is the first method executed
-* when the program is launched by the JVM.
-*
-* @param args Command-line arguments
-*/
-public static void main(String[] args) {
-    System.out.println("Welcome to Hotel Booking Management System");
-    System.out.println("System initialised successfully.");
+
+// ABSTRACT CLASS ROOM
+abstract class Room {
+
+    // Attributes
+    protected int numberOfBeds;
+    protected int squareFeet;
+    protected double pricePerNight;
+
+    // Constructor
+    public Room(int numberOfBeds, int squareFeet, double pricePerNight) {
+        this.numberOfBeds = numberOfBeds;
+        this.squareFeet = squareFeet;
+        this.pricePerNight = pricePerNight;
+    }
+
+    // Method to display room details
+    public void displayRoomDetails() {
+        System.out.println("Number of Beds: " + numberOfBeds);
+        System.out.println("Room Size: " + squareFeet + " sq ft");
+        System.out.println("Price per Night: " + pricePerNight);
+    }
 }
+
+
+// CLASS SingleRoom
+/**
+ * Represents a single room in the hotel.
+ * @version 2.1
+ */
+class SingleRoom extends Room {
+
+    /**
+     * Initializes a SingleRoom with predefined attributes.
+     */
+    public SingleRoom() {
+        super(1, 256, 1588.8);
+    }
+}
+
+class DoubleRoom extends Room {
+
+    /**
+     * Initializes a DoubleRoom with predefined attributes.
+     */
+    public DoubleRoom() {
+        super(2, 400, 2500.0);
+    }
+}
+
+class SuiteRoom extends Room {
+
+    /**
+     * Initializes a SuiteRoom with predefined attributes.
+     */
+    public SuiteRoom() {
+        super(3, 600, 5000.0);
+    }
+}
+
+
+
+// MAIN CLASS (for testing)
+public class App {
+    public static void main(String[] args) {
+
+        // Create SingleRoom object
+        SingleRoom room = new SingleRoom();
+        DoubleRoom doubleRoom = new DoubleRoom();
+        SuiteRoom suiteRoom = new SuiteRoom();
+
+        // Display details
+        room.displayRoomDetails();
+        doubleRoom.displayRoomDetails();
+        suiteRoom.displayRoomDetails();
+    }
 }
